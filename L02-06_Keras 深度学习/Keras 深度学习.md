@@ -1,12 +1,19 @@
 # Keras 深度学习
 
-Keras 是基于 Python 编写而成的深度学习人工神经网络框架。
+Keras 是 2015 年，一个由 Python 编写的开源深度学习人工神经网络库，可以作为 Tensorflow、Microsoft-CNTK 和 Theano 的高阶应用程序接口，进行深度学习模型的设计、调试、评估、应用和可视化。
+
+Keras 的命名来自古希腊语，含义为将梦境化为现实的 “牛角之门”。
 
 Keras 最核心的数据结构就是模型。Keras 提供的序列模型能够依次叠加想要的层。
 
 Keras 以 TensorFlow、Theano、CNTK 作为后端引擎运行，提供直观而简洁的 API，开发者不需要了解这些复杂的内部引擎，就可以在各自领域轻松使用和开发深度学习模型。
 
+Keras 的主要开发者是谷歌工程师 François Chollet，此外其 GitHub 项目页面包含 6 名主要维护者和超过 800 名直接贡献者。
+Keras在其正式版本公开后，除部分预编译模型外，按MIT许可证开放源代码。
 
+2017 年起，Keras 得到了 Tensorflow 团队的支持，其大部分组件被整合至 Tensorflow 的 Python API 中。
+在 2018 年 Tensorflow 2.0.0 公开后，Keras 被正式确立为 Tensorflow 高阶 API，即 tf.keras。
+此外，自 2017 年 7 月开始，Keras 也得到了CNTK 2.0 的后台支持。
 
 ## Keras 的主要特征
 
@@ -37,4 +44,19 @@ Keras 以 TensorFlow、Theano、CNTK 作为后端引擎运行，提供直观而�
 
 - Keras 可以看作为 TensorFlow 封装后的一个 API。即 Keras 作为一个封装在 TensorFlow 中的接口，很容易被 TensorFlow 调用。
 
-  ![TensorFlow 与 Keras](figures/TensorFlow 与 Keras.jpg)
+  ![Keras　与 TensorFlow](figures/Keras　与 TensorFlow.jpg)
+
+Keras 是一个高级库，位于其他深度学习模型之上，Keras 支持 CPU、GPU、TPU。
+
+![Keras 与其他模型](figures/Keras 与其他模型.jpg)
+
+## 为什么选 Keras
+
+在业界，Keras 被 Google、Netflix、Uber、NVIDIA 等主要技术公司所使用。
+
+The Data Incubator 17年11月发布的【 23 个热门深度学习库排名】显示，Keras 是排名最高的非框架深度学习库。而随着 R Studio 发布 Keras 的界面，Keras 的流行度还会不断提高。
+
+![深度学习库排名_2017](figures/深度学习库排名_2017.jpg)
+
+
+
