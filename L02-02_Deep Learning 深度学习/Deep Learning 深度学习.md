@@ -667,6 +667,8 @@ Anaconda 是一个开源的包和环境的管理器，用于在同一台机器�
 
 在 Anaconda 中，新建 TensorFlow + Python（指定的版本）的环境进行学习。
 
+### TensorBoard  工具
+
 
 
 ## Caffe 深度学习框架
