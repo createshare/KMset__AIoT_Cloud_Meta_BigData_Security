@@ -38,6 +38,74 @@ MQTT 最大优点在于，可以以极少的代码和有限的带宽，为连接
 ## MQTT 资源、网站
 
 - MQTT 官网：https://mqtt.org/
+- https://mqtt.org/software/
+- https://www.emqx.cn/mqtt
+
+
+
+## MQTT 应用场景
+
+![MQTT 应用场景](figures/MQTT 应用场景.png)
+
+
+
+## MQTT 版本
+
+### MQTT v3.1.1
+
+MQTT V3.1.1协议规范：http://docs.oasis-open.org/mqtt/mqtt/v3.1.1/os/mqtt-v3.1.1-os.html
+
+### MQTT v5.0
+
+MQTT V5.0 协议规范：https://docs.oasis-open.org/mqtt/mqtt/v5.0/cs02/mqtt-v5.0-cs02.html
+
+https://www.emqx.cn/mqtt/mqtt5  
+
+### MQTT-SN v1.2
+
+MQTT-SN：MQTT for sensor network可以基于蓝牙或UDP。
+
+
+
+## 为什么选择 MQTT
+
+- 轻量可靠
+  - MQTT 报文紧凑，可在严重受限的硬件设备和低带宽、高延迟的网络上实现稳定传输。
+- 生态更完善
+  - 覆盖全语言平台的客户端和 SDK， AWS IoT Core、 Azure IoT Hub 等顶级云厂商物联网平台标准通信协议，物联网事实标准。
+- 发布/订阅模式
+  - 基于发布/订阅模式，发布订阅模式的优点在于发布者与订阅者的解耦：订阅者与发布者不需要建立直接连接、也不需要同时在线。
+- 为物联网而生
+  - MQTT是为了物联网场景设计的基于TCP的Pub/Sub协议，有许多为物联网优化的特性，比如适应不同网络的QoS、层级主题、遗言等等。
+  - 提供心跳机制、遗嘱消息、QoS 质量等级+离线消息、主题和安全管理等全面的物联网应用特性。
+
+- 低功耗
+  - MQTT保证每个消息极其小（一个MQTT control message可以只有2byte），因此节约带宽也节约了接收端的电能。
+
+## MQTT vs  WebSocket
+
+- WebSocket 是为了 HTML5 应用方便与服务器双向通讯而设计的协议，HTTP 握手然后转 TCP 协议，用于取代之前的 Server Push、Comet、长轮询等老旧实现。
+- WebSocket 需要 Web Client Application（通常是浏览器），MQTT 不需要。
+- WebSocket 实现的是 Web Client 端和服务器端的长连接（即：管道。避免了 RESTful 那样的短连接），节省的是多次握手的开销。
+- MQTT 跟 WebSocket 可以认为是不同层面的协议。MQTT 做原生设备的通信，MQTT over WebSocket 主要用于 MQTT 设备跟 Web 端通信。
+- MQTT 跟 Websocket 两者之所有有交集，是因为一个应用场景：如何通过 HTML5 应用来作为 MQTT 的客户端，以便接受设备消息或者向设备发送信息，那么 MQTT over WebSocket 自然成了最合理的途径了。
+- MQTT 实现的是“发布/订阅”模型（名字里就有 Message Queue），不保持 Client 和 Broker 之间的连接。
+-  MQTT Client 和 Broker 之间的连接仍然是基于 TCP/IP 协议，但是理论上任何支持有序双向连接的网络协议都可以支持 MQTT，比如 MQTT-SN：MQTT for sensor network可以基于蓝牙或 UDP。  
+- MQTT 的接收广播的消息是通过 MQTT client，而不是 Web Client。由于在物联网应用场景中很多应用是没有 Web Client 的（比如你家微波炉上面不会安个浏览器。）
+
+### MQTT over WebSocket
+
+- Web Links：
+
+  https://www.emqx.cn/blog/connect-to-mqtt-broker-with-websocket
+
+  http://test.mosquitto.org/ws.html
+
+- MQTT over WebSocket 是把 MQTT control message 包装成 WebSocket 包，通过 WebSocket 管道发送。即使用 WebSocket 来支持MQTT Client 和 Broker 的连接。
+
+- MQTT over WebSocket 的思路，是想既利用 mqtt 的诸多优良特点，同时又可以对防火墙友好，不需要找 IT 开 1883/8883 端口。
+- 从部署成本的角度来说，在很多正规的客户企业现场部署物联网客户端的的时候，如果是 mqtt/ mqtts，就要找客户IT管理员在防火墙开 1883 和 8883 端口。用 WebSocket，就不需要找IT。
+- 更复杂点儿，还可以RDP / VNC / 串口透传 / 网口透传 / 文件 over mqtt over websocket。
 
 
 
