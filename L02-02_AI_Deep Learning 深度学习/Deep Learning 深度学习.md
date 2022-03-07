@@ -740,9 +740,12 @@ PyTorch 既可以看作是加了 GPU 支持的 numPy，也可以看成一个拥�
 计算机视觉领域相关的深度学习，详细内容请查阅 “Image Recognition 图像识别” 模块。
 
 - 图像处理：图像增广
+- 图像分类（Image classification）
 - 图像识别
 - 人脸识别
 - 动作识别
+- 物体检测（Object detection）
+- 姿态估计（Pose estimation）
 - 目标跟踪
 - 视频行为识别
 - 图像风格迁移（Neural Style）
@@ -751,6 +754,8 @@ PyTorch 既可以看作是加了 GPU 支持的 numPy，也可以看成一个拥�
 
 自然语言处理领域相关的深度学习，详细内容请查阅 “Speech Recognition 语音识别” 模块。
 
+- 语义分割（Segmentation）
+- 智能回复（Smart reply）
 - 智能音箱、手机语音助手：语音识别、语音合成、文本分类
 - 机器翻译
 - 语音输入法、同声传译
