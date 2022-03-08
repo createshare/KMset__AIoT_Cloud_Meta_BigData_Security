@@ -63,14 +63,12 @@ BLE 的全称叫做 Bluetooth Low Energy，也称之为低功耗蓝牙，属于�
 在大多数情况下， BLE 设备可运行在 4 个基本的模式：主模式、从模式、广播模式以及扫描模式。 
 
 - 广播模式下设备可以周期性地广播数据，也可以响应来自其它设备的扫描请求、连接请求。
-
 - 扫描模式下设备主要功能是扫描广播包。
-
 - 一旦处于广播模式下的设备接受了来自扫描模式下设备的连接请求，则两个设备就进入了连接状态。
-
 - 只有在连接状态下，两个设备才能进行读写等操作。
-
 - 与此同时，广播模式下的设备转变为从模式，扫描模式下的设备转变为主模式。
+
+
 
 ## BLE 数据包：广播包、数据包
 
@@ -84,11 +82,53 @@ BLE 数据包包含了： 8bit 的前导码、由 RF 通道所决定的 32bit �
 
 BLE 协议栈的广播数据包有一定的格式：长度（ 1 个字节） +类型（ 1 个字节） +数据（ N 个字节）。 并且最大长度为 31 个字节。
 
+
+
+## Power Class  
+
+![BLE Power Classes](figures/BLE Power Classes.jpg)
+
+## Actual Sensitivity Level  
+
+![BLE Actual Sensitivity Level](figures/BLE Actual Sensitivity Level.jpg)
+
+
+
+## Data Rate
+
+- LE 1 M PHY
+  - The mandatory symbol rate is 1 megasymbol per second (Msym/s)
+  - S=2, where 2 symbols represent 1 bit therefore supporting a bit rate of 500 kb/s
+  - S=8, where 8 symbols represent 1 bit therefore supporting a bit rate of 125 kb/s
+- LE 2 M PHY
+  - An optional symbol rate of 2 Msym/s may be supported, with a bit rate of 2 Mb/s, 2 Msym/s symbol rate supports uncoded data only
+- The symbol timing accuracy shall be better than ±50 ppm  
+
+
+
+## Why there is ble connection number limitation?  
+
+- Bluetooth spec has no limitation on ble connecitons.
+- RPA resolve need time, if the time is longer than response timeout, will fail.
+  – Ti cc2652, with privacy feature, 10 connections; without 32
+  – Nrf52810 has address accelerator (irk list 16), with privacy feature 20 (not test)
+- Each connection needs RAM to store state / tx rx buffer, mainly on link layer.
+  
+
 ## BLE 建立连接
 
 **主从机连接建立过程**
 
 ![主从机连接建立](figures/ble_connect.jpg)
+
+- Identity address = public address OR static random address
+
+- Random address
+  0 Non-resolvable private address
+  1 Resolvable private address (RPA)
+  3 Static random address  
+
+
 
 两个设备有三种关联方法：正常模式、带外工作和口令连接。
 
@@ -112,6 +152,36 @@ BLE 协议栈的广播数据包有一定的格式：长度（ 1 个字节） +�
   - 连接间隔被用来确定连接事件的开始时间。因此，较长的连接间隔意味着较小的数据交换率，较小的功耗；相反，较短的连接时间间隔意味着较大的数据交换率，较大的功耗。
   - 从机延迟时间指在不丢失连接的情况下，从机可以忽略的最大连接事件个数。这么做是为了优化功耗。
 - 一旦连接建立完成，数据的通信将在 37 个数据通道上进行。伴随着数据包头和 4 个字节的消息完整性检查字段。主从之间的信息交互由主设备发起的，直到任意一方中断连接。
+
+
+
+## Connection parameters  
+
+Connection event
+Connection interval (7.5 ms – 4 s)
+Supervision timeout (100 ms – 32 s)
+Slave latency
+Active clock accuracy 50 ppm
+T_IFS 150us +/- 2 us
+T_MSS 150us +/- 2us
+Sleep clock accuracy <= 500 ppm
+32k / rc (16 us, jitter)  
+
+![BLE Connection parameters](figures/BLE Connection parameters.jpg)
+
+
+
+## Frame Structure  
+
+ ![BLE Frame Structure](figures/BLE Frame Structure.jpg)
+
+
+
+## Bit Streaming Processing  
+
+![BLE Bit Streaming Processing](figures/BLE Bit Streaming Processing.jpg)
+
+
 
 # BLE 协议栈
 
@@ -283,7 +353,7 @@ GATT 层实现两个设备应用数据的通信。从 GATT 角度来看，当两
 
 # BLE 降低功耗
 
-### BLE 如何实现低功耗
+## BLE 如何实现低功耗
 
 低功耗蓝牙和传统蓝牙相比有如下几个方面改动：
 
@@ -305,7 +375,7 @@ GATT 层实现两个设备应用数据的通信。从 GATT 角度来看，当两
 
 
 
-### 蓝牙低功耗降低功耗的方法有以下几种：
+## 蓝牙低功耗降低功耗的方法有以下几种：
 
 - 首先，它使用一个较低的占空比，这味着它进入睡眠的时间较长，而唤醒来发送和接收数据包的频率较低。
 
@@ -565,3 +635,14 @@ mesh 网络中传输的所有数据对应不同网络层次和不同应用，它
 
 ## 蓝牙 mesh 的协议栈
 
+
+
+# Coexistence  for 2.4 GHz 
+
+
+
+# Reference 
+
+## BLE Reference book
+
+![BLE Reference book](figures/BLE Reference book.jpg)
