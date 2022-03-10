@@ -4,6 +4,10 @@ Z-Wave 是由丹麦公司 Zensys 所一手主导的无线组网规格，Z-Wave �
 
 Z-Wave 是一种新兴的基于射频的、低成本、低功耗、高可靠、适于网络的短距离无线通信技术。
 
+2019年Silicon labs宣布开放Z-Wave协议，目前仅有芯科科技一家芯片公司提供Z-Wave芯片和协议栈。
+
+![Z-Wave](figures/Z-Wave.png)
+
 
 
 ## Z-Wave 的应用
@@ -26,6 +30,19 @@ Z-Wave 技术设计用于住宅、照明商业控制以及状态读取应用，�
 ## 中国 Z-Wave 的厂家
 
 山东智慧生活数据系统有限公司、上海多灵科技有限公司、fantem、丰唐物联 等。
+
+WinTop（Z-Wave联盟成员）
+WinTop是一家生产基地位于上海的港资公司，该公司生产基于Z-Wave的低端智能网关设备，在欧洲市场有产
+品销售。WinTop现有的Z-Wave产品功能较薄弱，在处理器性能、蓝牙、OSGI方面难以满足需求。
+
+丰唐物联（Z-Wave联盟成员）
+目前丰唐物联的前身是位于硅谷的AeonLab公司，后来被深圳创业版上市企业英唐公司收购。主要从事Z-Wave
+智能家居设备的设计和制造。丰唐的生产目前由母公司英唐来代工，它的智能家居设备处理器较弱，ROM、RAM的
+容量较小，无2G/3G模块，支持WiFi。
+
+欧西迪（非Z-Wave联盟成员）
+欧西迪是一家东莞智能家居企业，主要从事欧美Z-Wave设备的ODM、OEM，在东莞和浙江有生产设施。欧西
+迪的智能家居网关运行裁剪版Linux,不支持WiFi和USB，无2G/3G模块，ROM、RAM容量较小，支持Java。
 
 # Z-Wave 的基础概念
 
@@ -129,15 +146,31 @@ Z-Wave 采用了动态路由技术，每个 Slave 内部都存有一个路由表
 
 在技术面上，Z-Wave 从原本的 9.6Kbit/s 提升到 40Kbit/s，并宣称提升后原本的 9.6Kbit/s 能与 40Kbit/s 共存。在节点数方面，一个 Z-Wave网路可支援两百三十二个点。
 
+## Z-Wave 和 Z-Wave LR 
 
+Z-Wave 协议支持Z-Wave和Z-Wave LR两种模式，Z-Wave是Mesh网络，Z-Wave LR是星形网络，这两种网络可以无缝兼容，100%共存。
+
+Z-Wave 网络最多可包含 232 个节点。节点可以重传消息以保证传递。 两个节点之间的典型通信范围是 100 米。 
+
+Z-Wave LR可以包含4000个节点。在14dbm(最大30dbm)的输出功率下可达1.6Km的直线距离。
+
+![Z-Wave 和 Z-Wave LR 技术对照](figures/Z-Wave 和 Z-Wave LR 技术对照.png)
 
 # Z-Wave 无线协议栈
 
+Z-Wave协议是一种低带宽半双工协议，旨在实现可靠的低成本无线网状网络通信协议。
+
+Z-Wave 是一种面向住宅控制和自动化市场的无线网状网络协议，但也可用于商业环境。 
+
+Z-Wave工作在Sub-1Ghz的ISM(industrial, scientific, and medical)频段，成功的避开了2.4GHz(Wi-Fi, Bluetooth, Zigbee)的干扰，同时拥有极远的传输距离。
 
 
 
+Z-Wave 生态系统提供了一个路由协议栈和一个完整的 Z-Wave应用程序框架，通过设备类型和命令类型保障设备之间的互操作部署。通过Z-Wave 认证计划，确保了所有设备类型之间的100%互操作性。
 
-![XXX](figures/XXX.jpg)
+![Z-Wave Controller and Node](figures/Z-Wave Controller and Node.jpg)
+
+
 
 
 
