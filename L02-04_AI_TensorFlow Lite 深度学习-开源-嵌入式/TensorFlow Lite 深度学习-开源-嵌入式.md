@@ -22,17 +22,38 @@ TensorFlow Lite 的目标是移动和嵌入式设备，它赋予了这些设备�
 
 ## TensorFlow Lite 组件、架构
 
+TensorFlow Lite支持一组核心运算符，包括量化和浮点运算，它们已经针对移动平台进行了调整。
+
 **组件包括**
 
-- TensorFlow 模型（TensorFlow Model）：训练后的 TensorFlow 模型，保存在磁盘中。
+- TensorFlow 模型（TensorFlow Model ）：训练后的 TensorFlow 模型，保存在磁盘中。
 - TensorFlow Lite 转换器（TensorFlow Lite Converter）：该程序将模型转换成 TensorFlow Lite 文件格式。
 - TensorFlow Lite 模型文件（TensorFlow Lite Model File）：该格式基于 FlatBuffers，经过优化以适应最大速度和最小规模。
+- TensorFlow Lite提供了一个利用硬件加速的接口（如果在设备上可用）
 
 ![TensorFlow Lite 架构设计](figures/TensorFlow Lite 架构设计.jpg)
 
 
 
-## TensorFlow Lite 流程
+## TensorFlow Lite 实现过程（宏观上）
+
+以 Android 物体检测模型为例，可以调用 TensorFlow Lite 模型，进而实现手机端能够运行物体检测模型。
+
+整体分为以下几个步骤：
+
+   1.训练一个 TensorFlow 模型（或者从下载他人训练好的模型）
+
+  2.生成 .pb 文件
+
+  3.将 .pb 文件转化为 .tflite 文件
+
+  4.以 Android 为例：
+
+使用 Android Studio 导入 TensorFlow 安卓样例 ，替换成我们生成的 tflite 文件，重新编译 APK。
+
+
+
+## TensorFlow Lite 流程（微观上）
 
 ![TensorFlow Lite 流程图](figures/TensorFlow Lite 流程图.jpg)
 
@@ -48,7 +69,7 @@ https://blog.csdn.net/weixin_42499236/article/details/102888565
 
 # TensorFlow Lite 预训练的模型
 
-ensorFlow Lite 团队提供了一系列预训练模型（pre-trained models），用于解决各种机器学习问题。这些模型已经转换为能与 TensorFlow Lite 一起使用，且可以在您的应用程序中使用的模型。
+TensorFlow Lite 团队提供了一系列预训练模型（pre-trained models），用于解决各种机器学习问题。这些模型已经转换为能与 TensorFlow Lite 一起使用，且可以在您的应用程序中使用的模型。
 
 这些预训练模型包括：
 
@@ -203,16 +224,16 @@ TensorFlow Lite model and use it to recognize objects in images.
 
 
 
-### i.MX8M Mini 运行： label_image 图像分类 
-
 
 
 ## Inception V3
 
+- 在 TensorFlow Lite 中兼容的模型是 Inception v3 和 MobileNets。
 - Inception V3是一种流行的模型，用于检测图像中存在的主要对象。
+- Inception v3 主要用于验证 ImageNet 数据集，这是一个被学界广泛认定为图片验证指标的数据集。
 
 ##  MobileNet模型
 
 - MobileNetsmobile-first系列计算机视觉模型，旨在有效提高准确性，同时注意on-device或嵌入式应用程序的受限资源。它们很小，低延迟，低功耗，模型参数化，以满足各种用例的资源约束。它们可以建立在分类，检测，嵌入和分割之上。 MobileNet模型比较小，但是比Inception V3准确度较低。
-
 - MobileNet模型的量化版本，其运行速度比CPU上的non-quantized(浮点)版本快。
+- MobileNets 则是转为移动设备而设计的模型，具有低能耗的特征，但相应的缺点就是准确度不如 Inception v3。
