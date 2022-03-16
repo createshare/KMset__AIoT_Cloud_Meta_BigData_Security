@@ -1,4 +1,4 @@
-# NB-IoT 窄带物联网  Narrow Band Internet of Things
+# NB-IoT 蜂窝窄带物联网  Narrow Band Internet of Things
 
 NB-IoT 聚焦于低功耗广覆盖（LPWA）物联网（IoT）市场，是一种可在全球范围内广泛应用的新兴技术。具有覆盖广、连接多、速率快、成本低、功耗低、架构优等特点。NB-IoT 使用 License 频段，可采取带内、保护带或独立载波等三种部署方式，与现有网络共存。
 
