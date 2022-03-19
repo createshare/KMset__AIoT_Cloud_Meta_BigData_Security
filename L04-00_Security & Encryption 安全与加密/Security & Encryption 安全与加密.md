@@ -137,19 +137,111 @@ CRL文件本身可以定期公布，或在每次更新时都公布，CRL文件�
 
 ## X.509
 
-X.509 是密码学里公钥证书的格式标准。 X.509 证书应用在包括 TLS/SSL（ WWW 万维网安全浏览的基石）在内的众多 Internet 协议里。
+- X.509 是密码学里公钥证书的格式标准。 X.509 证书应用在包括 TLS/SSL（ WWW 万维网安全浏览的基石）在内的众多 Internet 协议里。
 
-同时它也用在很多非在线应用场景里，比如电子签名服务。
-
-X.509 证书里含有公钥、身份信息(比如网络主机名，组织的名称或个体名称等)和签名信息（可以是证书签发机构CA的签名，也可以是自签名）。
-
-对于一份经由可信的证书签发机构签名或者可以通过其它方式验证的证书，证书的拥有者就可以用证书及相应的私钥来创建安全的通信，对文档进行数字签名。
-
-另外除了证书本身功能，X.509 还附带了证书吊销列表和用于从最终对证书进行签名的证书签发机构直到最终可信点为止的证书合法性验证算法。
+- 同时它也用在很多非在线应用场景里，比如电子签名服务。
+- X.509 证书里含有公钥、身份信息(比如网络主机名，组织的名称或个体名称等)和签名信息（可以是证书签发机构CA的签名，也可以是自签名）。
+- 对于一份经由可信的证书签发机构签名或者可以通过其它方式验证的证书，证书的拥有者就可以用证书及相应的私钥来创建安全的通信，对文档进行数字签名。
+- 另外除了证书本身功能，X.509 还附带了证书吊销列表和用于从最终对证书进行签名的证书签发机构直到最终可信点为止的证书合法性验证算法。
 
 ### X.509 数字证书结构图
 
 ![X.509 数字证书结构图](figures/X.509 数字证书结构图.jpg)
+
+### X.509 证书基本部分
+
+- 版本号(Version)： 标识证书的版本（版本1、版本2或是版本3）。
+- 序列号(Serial Number)：标识证书的唯一整数，由证书颁发者分配的本证书的唯一标识符。
+- 签名(Signature)：用于签证书的算法标识，由对象标识符加上相关的参数组成，用于说明本证书所用的数字签名算法。例如，SHA-1和RSA的对象标识符就用来说明该数字签名是利用RSA对SHA-1杂凑加密。
+
+- 颁发者(Issuer:)：证书颁发者的可识别名（DN）。
+- 有效期(Validity)：证书有效期的时间段。本字段由”Not Before”和”Not After”两项组成，它们分别由UTC时间或一般的时间表示（在RFC2459中有详细的时间表示规则）。
+
+- 主体(Subject)：证书拥有者的可识别名，这个字段必须是非空的，除非你在证书扩展中有别名。
+
+- 主体公钥信息(Subject Public Key Info)：主体的公钥（以及算法标识符）。
+
+- 颁发者唯一标识符(Issuer Unique Identifier)：标识符—证书颁发者的唯一标识符，仅在版本2和版本3中有要求，属于可选项。
+
+- 主体唯一标识符(Subject Unique Identifier)：证书拥有者的唯一标识符，仅在版本2和版本3中有要求，属于可选项。
+
+### X.509 证书扩展部分(Extensions)
+
+可选的标准和专用的扩展（仅在版本2和版本3中使用），扩展部分的元素都有这样的结构：
+
+- extnID：表示一个扩展元素的 OID
+- critical：表示这个扩展元素是否极重要
+- extnValue：表示这个扩展元素的值，字符串类型。
+
+```
+Extension ::= SEQUENCE {
+    extnID      OBJECT IDENTIFIER,
+    critical    BOOLEAN DEFAULT FALSE,
+    extnValue   OCTET STRING }
+```
+
+- 发行者密钥标识符(Autority Key Identifier)：证书所含密钥的唯一标识符，用来区分同一证书拥有者的多对密钥。
+- 密钥使用(Key Usage)：一个比特串，指明（限定）证书的公钥可以完成的功能或服务，如：证书签名、数据加密等。如果某一证书将 KeyUsage 扩展标记为“极重要”，而且设置为“keyCertSign”，则在 SSL 通信期间该证书出现时将被拒绝，因为该证书扩展表示相关私钥应只用于签写证书，而不应该用于 SSL。
+- CRL分布点(CRL Distribution Points)：指明CRL的分布地点。
+- 私钥的使用期：指明证书中与公钥相联系的私钥的使用期限，它也有Not Before和Not After组成。若此项不存在时，公私钥的使用期是一样的。
+- 证书策略(Certificate Policies)：由对象标识符和限定符组成，这些对象标识符说明证书的颁发和使用策略有关。
+- 策略映射：表明两个 CA 域之间的一个或多个策略对象标识符的等价关系，仅在 CA 证书里存在。
+- 主体别名：指出证书拥有者的别名，如电子邮件地址、IP 地址等，别名是和 DN 绑定在一起的。
+- 颁发者别名：指出证书颁发者的别名，如电子邮件地址、IP 地址等，但颁发者的DN 必须出现在证书的颁发者字段。
+- 主体目录属性：指出证书拥有者的一系列属性。可以使用这一项来传递访问控制信息。
+
+
+
+### X.509 C语言解析源码
+
+```c
+#include <fstream>
+#include <openssl/pem.h>
+#include <openssl/x509.h>
+#include <openssl/x509v3.h>
+#include <iostream>
+#include <sstream>
+
+using namespace std;
+//----------------------------------------------------------------------*/
+void parseCert(X509* x509)
+{
+    cout <<"--------------------" << endl;
+    BIO *bio_out = BIO_new_fp(stdout, BIO_NOCLOSE);
+    //PEM_write_bio_X509(bio_out, x509);//STD OUT the PEM
+    X509_print(bio_out, x509);//STD OUT the details
+    //X509_print_ex(bio_out, x509, XN_FLAG_COMPAT, X509_FLAG_COMPAT);//STD OUT the details
+    BIO_free(bio_out);
+}
+
+//----------------------------------------------------------------------*/
+int main(int argc, char **argv)
+{
+    OpenSSL_add_all_algorithms();
+
+    std::ifstream t;
+    int length;
+    t.open("./githubcom.pem");      // open input file
+    t.seekg(0, std::ios::end);    // go to the end
+    length = t.tellg();           // report location (this is the length)
+    t.seekg(0, std::ios::beg);    // go back to the beginning
+    char*  buffer = new char[length];    // allocate memory for a buffer of appropriate dimension
+    t.read(buffer, length);       // read the whole file into the buffer
+    t.close();                    // close file handle
+ 
+    BIO *bio_mem = BIO_new(BIO_s_mem());
+    BIO_puts(bio_mem, buffer);
+    X509 * x509 = PEM_read_bio_X509(bio_mem, NULL, NULL, NULL);
+    parseCert(x509);
+    BIO_free(bio_mem);
+    X509_free(x509);
+}
+//----------------------------------------------------------------------
+```
+
+
+
+## 申请请书 CSR
 
 在 X.509 里，组织机构通过发起证书签名请求 ( CSR ) 来得到一份签名的证书。
 
