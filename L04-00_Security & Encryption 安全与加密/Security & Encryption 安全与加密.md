@@ -192,6 +192,16 @@ Extension ::= SEQUENCE {
 
 
 
+### X.509 证书实例
+
+[https://www.github.com](https://www.github.com/) 的证书信息如下：
+
+![X.509 证书实例(GitHub)](figures/X.509 证书实例(GitHub).png)
+
+调用 Openssl 库的 API 对 githubcom.pem 证书文件解析结果如下：
+
+![X.509 证书实例(GitHub)_OpenSSL](figures/X.509 证书实例(GitHub)_OpenSSL.png)
+
 ### X.509 C语言解析源码
 
 ```c
