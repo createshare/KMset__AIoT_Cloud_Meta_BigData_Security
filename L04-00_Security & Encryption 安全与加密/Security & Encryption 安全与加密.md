@@ -808,5 +808,20 @@ HTTPS 在传输数据之前需要客户端(浏览器)与服务端(网站)之间�
 
 5. 浏览器解密并计算握手消息的HASH，如果与服务端发来的HASH一致，此时握手过程结束，之后所有的通信数据将由之前浏览器生成的随机密码并利用对称加密算法进行加密。
 
+## HTTPS 最佳实践工具
+
+| 网站     | 文档或工具名称                        | 地址                                                         | 说明                                                         |
+| -------- | ------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| SSL Labs | SSL Server Test                       | [https://www.ssllabs.com/ssltest/](https://links.jianshu.com/go?to=https%3A%2F%2Fwww.ssllabs.com%2Fssltest%2F) | 对服务器的 HTTPS 配置进行测试，指出潜在的问题，并对安全级别打分。 |
+| SSL Labs | SSL Client Test                       | [https://www.ssllabs.com/ssltest/viewMyClient.html](https://links.jianshu.com/go?to=https%3A%2F%2Fwww.ssllabs.com%2Fssltest%2FviewMyClient.html) | 测试客户端的配置情况                                         |
+| SSL Labs | SSL Pulse                             | [https://www.ssllabs.com/ssl-pulse/](https://links.jianshu.com/go?to=https%3A%2F%2Fwww.ssllabs.com%2Fssl-pulse%2F) | 对全球顶尖 HTTPS 网站进行长期跟踪，统计和 HTTPS 有关的一些数据 |
+| SSL Labs | SSL and TLS Deployment Best Practices | [https://www.ssllabs.com/projects/documentation/](https://links.jianshu.com/go?to=https%3A%2F%2Fwww.ssllabs.com%2Fprojects%2Fdocumentation%2F) | 最佳部署文档                                                 |
+| Mozilla  | 最佳部署文档                          | [https://wiki.mozilla.org/Security/Server_Side_TLS](https://links.jianshu.com/go?to=https%3A%2F%2Fwiki.mozilla.org%2FSecurity%2FServer_Side_TLS) | 重点介绍密码套件配置、HTTPS 潜在的攻击、最佳部署等           |
+| Mozilla  | Mozilla SSL Configuration Generator   | [https://mozilla.github.io/server-side-tls/ssl-config-generator/](https://links.jianshu.com/go?to=https%3A%2F%2Fmozilla.github.io%2Fserver-side-tls%2Fssl-config-generator%2F) | 用于自动化为服务器配置 HTTPS 协议                            |
+| RFC      | Summarizing Known Attacks on TLS      | [https://tools.ietf.org/html/rfc7457](https://links.jianshu.com/go?to=https%3A%2F%2Ftools.ietf.org%2Fhtml%2Frfc7457) | 详细描述 TLS/SSL 协议，历史上出现的漏洞                      |
+| RFC      | Recommendations for Secure Use of TLS | [https://tools.ietf.org/html/rfc7525](https://links.jianshu.com/go?to=https%3A%2F%2Ftools.ietf.org%2Fhtml%2Frfc7525) | 描述如何更好地部署 HTTPS 网站                                |
+
+
+
 # ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
