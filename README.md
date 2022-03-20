@@ -35,7 +35,7 @@ IT 技术总结与分享。
 
 ### 1.1.2 执行器
 
-### 
+
 
 ## 1.2 连接模块：无线或有线方式
 
@@ -59,7 +59,9 @@ IT 技术总结与分享。
 
 ## 1.6 Edge Calculation 边缘计算模块：AIOT
 
+## 1.7 RTOS 嵌入式实时操作系统
 
+## 1.8 Embedded Linux 嵌入式操作系统 
 
 
 
@@ -69,7 +71,9 @@ IT 技术总结与分享。
 
 ## 2.2 TPM 可信赖平台模块 
 
+## 2.3 OpenSSL 开放式安全套接层协议
 
+## 2.4 mbedTLS 算法库
 
 
 
@@ -85,21 +89,29 @@ IT 技术总结与分享。
 
 ## 4.2 Deep Learning 深度学习
 
-## 4.3 Image Recognition 图像识别
+## 4.3 TensorFlow 深度学习-开源
 
-## 4.4 Speech Recognition 语音识别
+## 4.4 TensorFlow Lite 深度学习-开源-嵌入式
 
-## 4.5 OpenCV 计算机视觉库
+## 4.5 Keras 深度学习
 
-## 4.6 Keras 深度学习
+## 4.6 PyTorch 深度学习
 
-## 4.7 PyTorch 深度学习
+## 4.7 Image Recognition 图像识别
+
+## 4.8 OpenCV 计算机视觉库
+
+## 4.9 Speech Recognition 语音识别
+
+
 
 
 
 # 5、Cloud Computing 云计算
 
 ## 5.1 物联网云平台
+
+## 5.2 AIoT Platform 物联网云平台
 
 
 
@@ -111,3 +123,16 @@ IT 技术总结与分享。
 
 
 
+# KM=KnowledgeManagement 知识管理
+
+## KM__IOT 嵌入式软硬件经验总结：模块、传感器、芯片 等 驱动经验总结
+
+![IOT 嵌入式软硬件经验总结：模块、传感器、芯片 等 驱动经验总结](KM__IOT 嵌入式软硬件经验总结：模块、传感器、芯片 等 驱动经验总结.png)
+
+## KM 知识管理（SVN-Git）
+
+![KM 知识管理（SVN-Git）](KM 知识管理（SVN-Git）.jpg)
+
+## KM_流程图 代码模块化、库化 （闭环：优化、迭代、复用）
+
+![KM__流程图_代码模块化、库化 （闭环：优化、迭代、复用）](KM__流程图_代码模块化、库化 （闭环：优化、迭代、复用）.png)
