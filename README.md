@@ -127,12 +127,12 @@ IT 技术总结与分享。
 
 ## KM__IOT 嵌入式软硬件经验总结：模块、传感器、芯片 等 驱动经验总结
 
-![IOT 嵌入式软硬件经验总结：模块、传感器、芯片 等 驱动经验总结](KM__IOT 嵌入式软硬件经验总结：模块、传感器、芯片 等 驱动经验总结.png)
+![IOT 嵌入式软硬件经验总结：模块、传感器、芯片 等 驱动经验总结](figures/KM__MCU_peripheral.png)
 
 ## KM 知识管理（SVN-Git）
 
-![KM 知识管理（SVN-Git）](KM 知识管理（SVN-Git）.jpg)
+![KM 知识管理（SVN-Git）](figures/KM__SVN_Git_Modules.jpg)
 
 ## KM_流程图 代码模块化、库化 （闭环：优化、迭代、复用）
 
-![KM__流程图_代码模块化、库化 （闭环：优化、迭代、复用）](KM__流程图_代码模块化、库化 （闭环：优化、迭代、复用）.png)
+![KM__流程图_代码模块化、库化 （闭环：优化、迭代、复用）](figures/KM__Code_Modularization_Library.png)
