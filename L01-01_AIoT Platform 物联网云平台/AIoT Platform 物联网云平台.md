@@ -52,7 +52,13 @@ AIoT 具有双重意义：
 
 
 
-![XXX](figures/XXX.jpg)
+
+
+
+
+# 云端 Architecture
+
+![云端 Architecture](figures/云端 Architecture.png)
 
 
 
