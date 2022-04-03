@@ -326,9 +326,34 @@ RTOS 嵌入式实时操作系统适用于设备端、功能较简单的主机网
 
 # ■■■■■■■■■■■■■■■■■■■■■■■
 
+# Kernel 内核移植
+
+## CPU Architecture Support 芯片支持包：架构、移植
+
+- x86
+- ARM
+  - ARM Cortex-M0/M3/M4/M0+ 系列
+  - RM Cortex-R4/R5/R7 系列
+  - ARM Cortex-A5/A7/A8/A9/A15 系列
+- RISC-V
+- MIPS
+  - MIPS32 系列
+  - MIPS64 系列
+- PowerPC
+- ColdFire
 
 
 
+## BSP & Device Driver 板级支持包 硬件抽象层 
 
+BSP 板级支持包 Board Support Package
+
+与硬件密切相关，由外设驱动和 CPU 移植构成。
+
+- Ethernet Driver
+- Serial  Driver
+- Flash Driver 
+- USB Driver 
+- Audio Driver
 
 
