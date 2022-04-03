@@ -393,3 +393,62 @@ BSP 板级支持包 Board Support Package
 
 
 # ■■■■■■■■■■■■■■■■■■■■■■■
+
+# Component 组件
+
+## shell 控制台
+
+- 接受C语言语句语法的人机交互命令行
+  - 把C语言代码中的函数和变量直接当成命令来使用，相当于在命令中能够直接访问系统函数和变量，为命令行方式动态地访问系统提供强大的接口。
+  - 适合于测试，增量开发的辅助组件，能够通过命令行方便的(动态地)查看系统状态。
+  - 与具体使用的设备无关，能够直接应用于 Telnet 服务中。
+- 简单的新命令行添加方式
+  - FINSH_FUNCTION_EXPORT(hello, say hello)
+  - FINSH_VAR_EXPORT(log, trigger log for debug)
+
+
+
+## File System 文件系统
+
+- 面向小型设备的虚拟文件系统
+  - 类似Linux融合了多种文件系统的超级文件系统
+  - 为上层应用提供统一的文件访问接口，而不用关心底层文件系统的具体实现及存储方式
+- 支持FAT12/16/32、ext4、NFSv3、ROMFS等文件系统
+- 支持长文件名，中文文件名
+- 支持SPI Flash、SD卡等
+
+
+
+## Network Stack 网络协议栈 TCP IP
+
+- 全功能的 LwIP TCP/IPv4协议栈，支持：
+
+  - IP、ARP、ICMP、IGMP、TCP、UDP
+  - PPP、DHCP、DNS
+  - HTTP、TFTP、FTP等众多协议
+
+- 提供BSD Socket标准风格接口，方便移植/调试现有的一些网络应用。
+
+- 为微控制器极度优化：5K RAM占用
+
+- 在ARM Cortex-M3上 TCP 数据吞吐量不低于：600KB/s接收，1MB/s发送。
+
+  ![LwIP 网络协议栈](figures/LwIP 网络协议栈.jpg)
+
+
+
+## POSIX 接口
+
+## 电源管理
+
+## Driver Framework 驱动框架
+
+## Debug 调试组件
+
+
+
+### Log 日志
+
+
+
+## Test 测试组件
