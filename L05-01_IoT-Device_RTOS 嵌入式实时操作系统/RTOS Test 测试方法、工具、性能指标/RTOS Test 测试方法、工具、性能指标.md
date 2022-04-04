@@ -70,9 +70,289 @@ RTOS 测试框架，目的使用统一的框架接口编写测试程序，实现
 
 
 
-# ■■■■■■■■■■■■■■■■■■■■■■
+## RTOS 系统性能测试
+
+系统性能测试采用的是 `benchmark` 软件包，包含如下测试内容：
+
+| 文件                              | 测试内容                                  |
+| --------------------------------- | ----------------------------------------- |
+| benchmark_mbox.c                  | 邮箱 recv/send 性能测试                   |
+| benchmark_mpool.c                 | 内存池 alloc/free 性能测试                |
+| benchmark_semaphore.c             | 信号量 take/release 性能测试              |
+| benchmark_thread_create.c         | 线程 create API 性能测试                  |
+| benchmark_thread_init.c           | 线程 init API 性能测试                    |
+| benchmark_thread_switch_mb.c      | 使用邮箱进行线程切换时的性能测试          |
+| benchmark_thread_switch_sem.c     | 使用信号量进行线程切换时的性能测试        |
+| benchmark_thread_switch_suspend.c | 使用 suspend API 进行线程切换时的性能测试 |
+| benchmark_thread_switch_count     | 使用 yield API 进行线程切换时的性能测试   |
+| benchmark_thread_switch_interrupt | 使用中断触发线程切换时的性能测试          |
+| benchmark_memory_correctness.c    | 内存正确性测试                            |
+| benchmark_memory_performance.c    | 内存性能测试                              |
+| benchmark_file_correctness.c      | 文件正确性测试                            |
+| benchmark_file_performance.c      | 文件读写性能测试                          |
+| benchmark_float.c                 | 浮点数计算测试                            |
+
+### 测试记录
+
+以下是在 `qemu-vexpress-a9` 开发平台上进行的测试日志（平台：`qemu-vexpress-a9`，主频：`1MHZ`，编译选项：`-O0 -gdwarf-2`，系统心跳：`100 hz` ）
+
+### 邮箱
+
+```bash
+msh />benchmark_mbox
+MBox send time:
+CPU: 1 MHz,OS Tick: 100 HZ
+Average time: 0.843 us
+Maximum time: 0.999 us
+Minimum time: 0.000 us
+MBox receive time:
+CPU: 1 MHz,OS Tick: 100 HZ
+Average time: 0.531 us
+Maximum time: 0.999 us
+Minimum time: 0.000 us
+```
+
+### 内存池
+
+```bash
+msh />benchmark_mpool
+MemPool allocate time:
+CPU: 1 MHz,OS Tick: 100 HZ
+Average time: 0.749 us
+Maximum time: 0.999 us
+Minimum time: 0.000 us
+MemPool free time:
+CPU: 1 MHz,OS Tick: 100 HZ
+Average time: 0.843 us
+Maximum time: 0.999 us
+Minimum time: 0.000 us
+```
+
+### 信号量
+
+```bash
+msh />benchmark_sem
+Semaphore take time:
+CPU: 1 MHz,OS Tick: 100 HZ
+Average time: 0.531 us
+Maximum time: 0.999 us
+Minimum time: 0.000 us
+Semaphore release time:
+CPU: 1 MHz,OS Tick: 100 HZ
+Average time: 0.656 us
+Maximum time: 0.999 us
+Minimum time: 0.000 us
+```
+
+### 线程创建
+
+```bash
+msh />benchmark_thread_create
+msh />Thread create time:
+CPU: 1 MHz,OS Tick: 100 HZ
+Average time: 0.994 us
+Maximum time: 0.997 us
+Minimum time: 0.988 us
+```
+
+### 线程初始化
+
+```bash
+msh />benchmark_thread_init
+msh />Thread init time:
+CPU: 1 MHz,OS Tick: 100 HZ
+Average time: 0.995 us
+Maximum time: 0.997 us
+Minimum time: 0.992 us
+```
+
+### 使用邮箱切换线程
+
+```bash
+msh />benchmark_thread_switch_mb
+Thread switch by mailbox:
+CPU: 1 MHz,OS Tick: 100 HZ
+Average time: 0.814 us
+Maximum time: 0.999 us
+Minimum time: 0.000 us
+```
+
+### 使用信号量切换线程
+
+```bash
+msh >benchmark_thread_switch_sem
+Thread switch by semaphore:
+CPU: 1 MHz,OS Tick: 100 HZ
+Average time: 0.901 us
+Maximum time: 0.999 us
+Minimum time: 0.000 us
+```
+
+### 使用 suspend 切换线程
+
+```bash
+msh >benchmark_thread_switch_suspend
+Thread switch by suspend:
+CPU: 1 MHz,OS Tick: 100 HZ
+Average time: 0.944 us
+Maximum time: 0.999 us
+Minimum time: 0.000 us
+```
+
+### 使用 yield 切换线程
+
+```bash
+msh >benchmark_thread_switch_count
+In one second, t1: 244371 times,t2: 244372 times, total: 488743 times
+Average thread switching time 2.4us
+```
+
+### 使用中断切换线程
+
+```bash
+msh />Thread switch from interrupt by semaphore:
+CPU: 1 MHz,OS Tick: 100 HZ
+Average time: 0.997 us
+Maximum time: 0.998 us
+Minimum time: 0.989 us
+```
+
+### 内存正确性
+
+```bash
+benchmark_mem_test
+Test has started.
+msh />benchmark_mem_test -stop
+msh />Test finished. All memory is correct.
+Memory test count is 3990191.
+```
+
+#### 内存正确性测试参数介绍
+
+
+* `-m` : 测试指定的 memheap. 例如: `benchmark_memory_test --m heap`
+
+
+* `-stop` : 停止测试
+
+
+* `-addr` 测试指定地址: 例如 : `benchmark_memory_test -addr 0x60000000`
+
+
+### 内存性能
+
+``` bash
+msh />benchmark_mem_perf
+BENCHMARK_SIZE:8192byte BENCHMARK_LOOP:4096
+---------- item ------ tick -- speed ----------
+heap       [8bit]    write    8      400.00Mbyte/s
+heap       [8bit]    read    11      290.90Mbyte/s
+heap       [16bit]   write    4      800.00Mbyte/s
+heap       [16bit]   read     5      640.00Mbyte/s
+heap       [32bit]   write    2     1600.00Mbyte/s
+heap       [32bit]   read     3     1066.66Mbyte/s
+heap       [memset]  write    1     3200.00Mbyte/s
+heap       [memcpy]  write    1     3200.00Mbyte/s
+```
+
+#### 内存性能测试参数介绍
+
+* `-m` : 测试指定的 memheap. 例如: `benchmark_mem_perf --m heap`
+* `-addr` 测试指定地址: 例如 : `benchmark_mem_perf -addr 0x60000000`
+* 支持多指令测试 例如 ： `benchmark_mem_perf -m heap -addr 0x601a0500 -addr 0x601a0918`
+
+### 文件正确性及其参数介绍
+
+#### `benchmark_file_correctness filename count size times`
+
+* `filename` ： 测试文件名称
+* `count`    ： 测试文件生成数量
+* `size`     ： 测试文件总大小
+* `times`    ： 测试次数
+
+```bash
+msh />benchmark_file_correctness test 10 50M 10240
+start file test[test]. success
+Use 'benchmark_file_correctness -i' command to view test details
+```
+
+#### `benchmark_file_correctness -i`
+
+* `-i` : 查看测试详情
+
+```
+msh />benchmark_file_correctness -i
+  name              percent      index       size   state
+----------------  -----------  -----------  ------  -----
+test              10240/0          10/8       4.50M/3.75M  -r
+test                  1/1          10/9           0/0      ok
+```
+
+测试状态
+
+* `-r`   ： 正在读取文件
+* `-w`   ： 正在写入文件
+* `-d`   ： 正在删除文件
+* `err`  ： 文件异常
+* `stop` ： 停止测试
+* `ok`   :  测试成功
+
+#### `benchmark_file_correctness -d name`
+
+* `-d`   ： 删除测试
+* `name` ： 测试名称
+
+测试成功
+
+```bash
+msh />benchmark_file_correctness -d test
+delete file test:test
+file test success!
+```
+
+### 文件读写性能
+
+```bash
+msh />benchmark_file_perf perf.txt 4096 4096
+file:perf.txt total:4096 bs:4096
+write: >
+read : <
+File speed test end.
+write: 4095.99Mbyte/s
+read : 4095.99Mbyte/s
+```
+
+#### 文件读写性能测试参数介绍
+
+`benchmark_file_perf filename total_length block_size`
+
+* `filename` : 文件名称
+* `total_length` ：文件大小    
+* `block_size` : 单次写入数据量
+
+### 浮点数计算
+
+```bash
+msh />benchmark_float
+Wait for 10000 ms to end automatically
+msh />test ok. pi=3.141522 c=14140
+test ok. pi=3.141670 c=12995
+test end
+```
+
+
+
+
 
 # CPU 性能测试
+
+
+
+# 网络性能
+
+网络性能测试采用的是 `jperf` 工具和 `iperf` 软件包
+
+
 
 
 
