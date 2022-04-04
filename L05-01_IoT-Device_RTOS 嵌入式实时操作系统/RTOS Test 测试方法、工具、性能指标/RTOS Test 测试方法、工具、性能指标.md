@@ -396,11 +396,194 @@ Memory performance completed.
 
 # CPU 性能测试
 
+CPU 性能测试采用的是 `coremark` 和 `dhrystone` 软件包。
+
+## coremark
+
+以下是在 `qemu-vexpress-a9` 开发平台上进行的测试日志（平台：`qemu-vexpress-a9`，主频：`1MHZ`，编译选项：`-O0 -gdwarf-2`，系统心跳：`100 hz` ）
+
+```bash
+msh />core_mark
+Benchmark started, please make sure it runs for at least 10s.
+
+2K performance run parameters for coremark.
+CoreMark Size    : 666
+Total ticks      : 5423
+Total time (secs): 54.230000
+Iterations/Sec   : 663.839203
+Iterations       : 36000
+Compiler version : GCC5.4.1 20160919 (release) [ARM/embedded-5-branch revision 240496]
+Compiler flags   :
+Memory location  : STACK
+seedcrc          : 0xe9f5
+[0]crclist       : 0xe714
+[0]crcmatrix     : 0x1fd7
+[0]crcstate      : 0x8e3a
+[0]crcfinal      : 0xcc42
+Correct operation validated. See README.md for run and reporting rules.
+CoreMark 1.0 : 663.839203 / GCC5.4.1 20160919 (release) [ARM/embedded-5-branch revision 240496]  / STACK
+```
+
+以下是在 `qemu-vexpress-a9` 开发平台上进行的测试日志（平台：`qemu-vexpress-a9`，主频：`1MHZ`，编译选项：`-O3`，系统心跳：`100 hz` ）
+
+```bash
+msh />core_mark
+Benchmark started, please make sure it runs for at least 10s.
+
+2K performance run parameters for coremark.
+CoreMark Size    : 666
+Total ticks      : 1183
+Total time (secs): 11.830000
+Iterations/Sec   : 3043.110735
+Iterations       : 36000
+Compiler version : GCC5.4.1 20160919 (release) [ARM/embedded-5-branch revision 240496]
+Compiler flags   :
+Memory location  : STACK
+seedcrc          : 0xe9f5
+[0]crclist       : 0xe714
+[0]crcmatrix     : 0x1fd7
+[0]crcstate      : 0x8e3a
+[0]crcfinal      : 0xcc42
+Correct operation validated. See README.md for run and reporting rules.
+CoreMark 1.0 : 3043.110735 / GCC5.4.1 20160919 (release) [ARM/embedded-5-branch revision 240496]  / STACK
+```
+
+## dhrystone
+
+以下是在 `qemu-vexpress-a9` 开发平台上进行的测试日志（平台：`qemu-vexpress-a9`，主频：`1MHZ`，编译选项：`-O0 -gdwarf-2`，系统心跳：`100 hz` ）
+
+```bash
+msh />dhrystone_test
+
+Dhrystone Benchmark, Version 2.1 (Language: C)
+
+Program compiled without 'register' attribute
+
+Execution starts, 6000000 runs through Dhrystone
+Execution ends
+
+Final values of the variables used in the benchmark:
+
+Int_Glob:            5
+        should be:   5
+Bool_Glob:           1
+        should be:   1
+Ch_1_Glob:           A
+        should be:   A
+Ch_2_Glob:           B
+        should be:   B
+Arr_1_Glob[8]:       7
+        should be:   7
+Arr_2_Glob[8][7]:    6000010
+        should be:   Number_Of_Runs + 10
+Ptr_Glob->
+  Ptr_Comp:          1613368260
+        should be:   (implementation-dependent)
+  Discr:             0
+        should be:   0
+  Enum_Comp:         2
+        should be:   2
+  Int_Comp:          17
+        should be:   17
+  Str_Comp:          DHRYSTONE PROGRAM, SOME STRING
+        should be:   DHRYSTONE PROGRAM, SOME STRING
+Next_Ptr_Glob->
+  Ptr_Comp:          1613368260
+        should be:   (implementation-dependent), same as above
+  Discr:             0
+        should be:   0
+  Enum_Comp:         1
+        should be:   1
+  Int_Comp:          18
+        should be:   18
+  Str_Comp:          DHRYSTONE PROGRAM, SOME STRING
+        should be:   DHRYSTONE PROGRAM, SOME STRING
+Int_1_Loc:           5
+        should be:   5
+Int_2_Loc:           13
+        should be:   13
+Int_3_Loc:           7
+        should be:   7
+Enum_Loc:            1
+        should be:   1
+Str_1_Loc:           DHRYSTONE PROGRAM, 1'ST STRING
+        should be:   DHRYSTONE PROGRAM, 1'ST STRING
+Str_2_Loc:           DHRYSTONE PROGRAM, 2'ND STRING
+        should be:   DHRYSTONE PROGRAM, 2'ND STRING
+
+Microseconds for one run through Dhrystone: 1
+Dhrystones per Second:                      651465 
+VAX  MIPS rating:                           370
+```
+
+以下是在 `qemu-vexpress-a9` 开发平台上进行的测试日志（平台：`qemu-vexpress-a9`，主频：`1MHZ`，编译选项：`-O3`，系统心跳：`100 hz` ）
+
+```bash
+dhrystone_test
+msh />dhrystone_test
+
+Dhrystone Benchmark, Version 2.1 (Language: C)
+
+Program compiled without 'register' attribute
+
+Execution starts, 6000000 runs through Dhrystone
+Execution ends
+
+Final values of the variables used in the benchmark:
+
+Int_Glob:            5
+        should be:   5
+Bool_Glob:           1
+        should be:   1
+Ch_1_Glob:           A
+        should be:   A
+Ch_2_Glob:           B
+        should be:   B
+Arr_1_Glob[8]:       7
+        should be:   7
+Arr_2_Glob[8][7]:    6000010
+        should be:   Number_Of_Runs + 10
+Ptr_Glob->
+  Ptr_Comp:          1613237192
+        should be:   (implementation-dependent)
+  Discr:             0
+        should be:   0
+  Enum_Comp:         2
+        should be:   2
+  Int_Comp:          17
+        should be:   17
+  Str_Comp:          DHRYSTONE PROGRAM, SOME STRING
+        should be:   DHRYSTONE PROGRAM, SOME STRING
+Next_Ptr_Glob->
+  Ptr_Comp:          1613237192
+        should be:   (implementation-dependent), same as above
+  Discr:             0
+        should be:   0
+  Enum_Comp:         1
+        should be:   1
+  Int_Comp:          18
+        should be:   18
+  Str_Comp:          DHRYSTONE PROGRAM, SOME STRING
+        should be:   DHRYSTONE PROGRAM, SOME STRING
+Int_1_Loc:           5
+        should be:   5
+Int_2_Loc:           13
+        should be:   13
+Int_3_Loc:           7
+        should be:   7
+Enum_Loc:            1
+        should be:   1
+Str_1_Loc:           DHRYSTONE PROGRAM, 1'ST STRING
+        should be:   DHRYSTONE PROGRAM, 1'ST STRING
+Str_2_Loc:           DHRYSTONE PROGRAM, 2'ND STRING
+        should be:   DHRYSTONE PROGRAM, 2'ND STRING
+
+Microseconds for one run through Dhrystone: 0 
+Dhrystones per Second:                      1006711
+VAX  MIPS rating:                           572
+```
 
 
-# 网络性能
-
-网络性能测试采用的是 `jperf` 工具和 `iperf` 软件包
 
 
 
