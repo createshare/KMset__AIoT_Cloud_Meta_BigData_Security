@@ -342,6 +342,56 @@ test end
 
 
 
+# 内存性能
+
+内存性能测试采用的是 `memoryperf` 软件包。
+
+## 测试记录
+
+以下是在 `qemu-vexpress-a9` 开发平台上进行的测试日志（平台：`qemu-vexpress-a9`，主频：`1MHZ`，编译选项：`-O0 -gdwarf-2`，系统心跳：`100 hz` ）
+
+```bash
+msh />memory_perf
+Memory performance Uasge...
+    memory_perf [address] [size]
+```
+
+```bash
+msh />memory_perf 0x10030000 0x80000
+Memory performance testing start...
+address: 0x10030000, length: 524288
+--------------------------------------
+8-bit write speed test begin.
+Data length : 524 MB.
+Spend time : 26.879999 s.
+8-bit write speed: 19.504763 M/s.
+8-bit read speed test begin.
+Data length : 524 MB.
+Spend time : 26.430000 s.
+8-bit Read speed: 19.836851 M/s.
+--------------------------------------
+16-bit write speed test begin.
+Data length : 524 MB.
+Spend time : 13.900000 s.
+16-bit write speed: 37.718563 M/s.
+16-bit read speed test begin.
+Data length : 524 MB.
+Spend time : 13.690000 s.
+16-bit Read speed: 38.297153 M/s.
+--------------------------------------
+32-bit write speed test begin.
+Data length : 524 MB.
+Spend time : 6.880000 s.
+32-bit Write speed: 76.204651 M/s.
+32-bit read speed test begin.
+Data length : 524 MB.
+Spend time : 6.760000 s.
+32-bit Read speed: 77.557388 M/s.
+Memory performance completed.
+```
+
+
+
 
 
 # CPU 性能测试
