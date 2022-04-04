@@ -439,7 +439,7 @@ BSP 板级支持包 Board Support Package
 
 ## POSIX 接口
 
-## 电源管理
+## Power Management 电源管理
 
 ## Driver Framework 驱动框架
 
@@ -452,3 +452,48 @@ BSP 板级支持包 Board Support Package
 
 
 ## Test 测试组件
+
+# ■■■■■■■■■■■■■■■■■■■■■■■
+
+# Package 软件包
+
+## IoT Package 物联软件包
+
+Paho MQTT、 WebClient、 mongoose、 WebTerminal 等等。  
+
+## 脚本语言相关的软件包
+
+JerryScript（小程序应用）、 MicroPython  
+
+## 多媒体相关的软件包  
+
+Openmv、 mupdf  
+
+## 工具类软件包  
+
+CmBacktrace、 EasyFlash、 EasyLogger、 SystemView  
+
+## 系统相关的软件包  
+
+TGUI、 Persimmon UI、 lwext4、 partition、 SQLite 等等。  
+
+## 外设库与驱动类软件包
+
+RealTek RTL8710BN SDK  
+
+# ■■■■■■■■■■■■■■■■■■■■■■■
+
+# Hardware 硬件
+
+CPU/RAM/Flash/UART/EMAC 等。
+
+
+
+# ■■■■■■■■■■■■■■■■■■■■■■■
+
+# RTOS Others 其他
+
+
+
+## RTOS 系统启动流程
+
